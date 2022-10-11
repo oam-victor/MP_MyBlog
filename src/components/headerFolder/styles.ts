@@ -19,6 +19,10 @@ export const Container = styled.div`
 
         &:hover{
             color: red;
+            cursor: pointer;
+        }
+        &:focus{
+            border: none;
         }
     }
 `;

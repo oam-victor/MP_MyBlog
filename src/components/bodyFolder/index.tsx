@@ -1,40 +1,36 @@
 import { Container } from "./styles";
 import  { BiTrashAlt } from "react-icons/bi"
 import { IconContext } from "react-icons";
+import { useContext, useEffect, useState } from "react";
+import { api } from "../../services/api";
+import { PostsContext } from "../../PostContext";
 
 export function Blogbody(){
+
+    const { posts } = useContext(PostsContext);
+
     return(
         <Container>
-            <div className="buttons">
-                <dl>
-                    <dt className="listTitle"> My day</dt>
-                    <dd className="listBody"> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </dd>
-                    <dd className="listFooter"> Victor</dd>
-                </dl>
-                
-                <IconContext.Provider value={{ size: "1.3rem" }}>
-                    <button
-                    type="button">
-                        <BiTrashAlt />
-                    </button>
-                </IconContext.Provider>
-            </div>
+            {
+                posts.map(post => (
 
-            <div className="buttons">
-                <dl>
-                    <dt className="listTitle"> Your day</dt>
-                    <dd className="listBody"> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </dd>
-                    <dd className="listFooter"> Odam</dd>
-                </dl>
-                
-                <IconContext.Provider value={{ size: "1.3rem" }}>
-                    <button
-                    type="button">
-                        <BiTrashAlt />
-                    </button>
-                </IconContext.Provider>
-            </div>
-           
+                    <div key={post.id} className="buttons">
+                         <dl>
+                          <dt className="listTitle">{post.title}</dt>
+                             <dd className="listBody">{post.post} </dd>
+                             <dd className="listFooter"> {post.author}</dd>
+                         </dl>
+                        
+                         <IconContext.Provider value={{ size: "1.3rem" }}>
+                             <button
+                            type="button">
+                                 <BiTrashAlt />
+                             </button>
+                         </IconContext.Provider>
+                     </div>
+                    )
+                )
+            }
         </Container>
     );
 }
